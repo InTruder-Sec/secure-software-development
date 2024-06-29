@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS test</title>
+</head>
+<body>
+    <script>
+        function sayHello() {
+            const name = document.getElementById('name').value;
+            document.getElementById('name-output').innerHTML = `Hello, ${name}!`;
+        }
+        function sanitize(string) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#x27;',
+                "/": '&#x2F;',
+            };
+            const reg = /[&<>"'/]/ig;
+            return string.replace(reg, (match)=>(map[match]));
+        }
+
+        function saySecureHello() {
+            const name = document.getElementById('name').value;
+            const safe = sanitize(name);
+            document.getElementById('name-output').innerHTML = `Hello, ${safe}!`;
+        }
+
+        function setCookie() {
+            document.cookie = "secret=sessionidtoken";
+        }
+        setCookie();
+    </script>
+    <label for="name">Enter your name:</label>
+    <input type="text" name="name" id="name" placeholder="Enter your name">
+    <button onclick="sayHello()">Submit</button>
+    <div id="name-output"></div>
+</body>
+</html>
