@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRF Test</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: monospace;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 100px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            margin-bottom: 10px;
+            width: 200px;
+            border: 2px solid lime;
+            background-color: black;
+            color: lime;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: lime;
+            color: black;
+            border: none;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: black;
+            color: lime;
+        }
+    </style>
+    
+</head>
+</head>
+<body>
+    <form method="GET" action="https://google.com" onsubmit="alert('Request sent')" >
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"><br>
+        <button type="submit" >Submit</button>
+    </form>
+
+    <div style="margin-top: 80px;">
+        <h2>How CSRF Token work!</h2>
+
+        <img src="./demonstration.png" alt="CSRF Token demonstration" width="80%">
+        
+    </div>
+</body>
+</html>
